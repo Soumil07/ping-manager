@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  bot:
+    image: soumil07/ping-manager:v1.0.0-alpha
+    restart: "always"
+    command: "start"
+    env_file: .env
+    ports:
+        - "4000:8080"
+    depends_on:
+        - postgres
+  postgres:
+    image: postgres
+    restart: "always"
+    env_file: .env
+    ports:
+        - "$PGSQL_DATABASE_EXPOSED_PORT:5432"
+    environment:
+        - POSTGRES_DB=ping-manager
+        - "POSTGRES_USER=$PGSQL_DATABASE_USER"
+        - "POSTGRES_PASSWORD=$PGSQL_DATABASE_PASSWORD"
+    volumes:
+        - pm-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  pm-postgres-data:
+    external: true
+

@@ -1,0 +1,29 @@
+{
+	"extends": "@sapphire/ts-config",
+	"include": [
+		"**/*.ts",
+		"**/*.json"
+	],
+	"compilerOptions": {
+		"target": "es2017",
+		"useDefineForClassFields": true,
+		"resolveJsonModule": true,
+		"outDir": "../dist",
+		"rootDir": ".",
+		"baseUrl": ".",
+		"composite": true,
+		"declaration": true,
+		"paths": {
+			"@root/*": [
+				"./*"
+			],
+			"@lib/*": [
+				"lib/*",
+			]
+		},
+		"lib": ["ES2015", "DOM"],
+		"types": [
+			"@sapphire/plugin-logger/dist/register"
+		]
+	}
+}
