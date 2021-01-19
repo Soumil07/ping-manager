@@ -17,7 +17,7 @@ export default class extends Command {
     public async run(message: Message) {
         const { roles } = await DbSet.connect();
         const output = [];
-        for (const roleData of await roles.find()) {
+        for (const roleData of await roles.find({ guildID: message.guild!.id })) {
             const role = message.guild!.roles.cache.get(roleData.id);
             output.push(`${role?.name ?? 'Deleted Role'} - ${kFormatter.format(roleData.cooldown)}`);
         }

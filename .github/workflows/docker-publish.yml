@@ -39,4 +39,4 @@ jobs:
           push: true
           tags: soumil07/ping-manager:${{ github.event.inputs.tag_name }}
       - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+        run: echo ${{ steps.docker_build.outputs.digest || steps.docker_build_alpha.outputs.digest }}
